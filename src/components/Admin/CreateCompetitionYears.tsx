@@ -10,10 +10,10 @@ interface FormValues {
 const CreateCompetitionYears = () => {
   const mutate = api.competitionAssignments.create.useMutation({
     onSuccess: () => {
-      console.log('yippe');
+      console.log('Success');
     },
     onError: () => {
-      console.log('bruh');
+      console.log('Failure');
     },
   });
 
