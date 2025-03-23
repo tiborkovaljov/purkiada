@@ -13,9 +13,6 @@ export default function Home() {
 
 	return (
 		<div className="relative flex w-full flex-1 flex-col items-center justify-center gap-20 p-10">
-      {data.map((user => {
-        return <div key={user.id}>{user.name}</div>
-      }))}
       <div className="mx-auto flex max-w-6xl flex-col items-center md:flex-row">
         <div className="text-left md:w-1/2">
           <h1 className="text-4xl font-bold md:text-6xl">
