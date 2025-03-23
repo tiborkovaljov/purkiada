@@ -1,4 +1,4 @@
-import RegistrationLoginForm from "~/components/RegistrationLoginForm";
+import RegistrationLoginForm from '~/components/RegistrationLoginForm';
 
 const Login = () => {
   return (
@@ -6,10 +6,13 @@ const Login = () => {
       <h1 className="pb-6 pt-6 text-center text-6xl font-bold text-[#5480a9]">
         Registrovat se
       </h1>
-			<p className="pb-6 pt-6 text-center">
-        Máte již účet? <a href="/login" className="text-[#5480a9]">Přihlaste se.</a>
+      <p className="pb-6 pt-6 text-center">
+        Máte již účet?{' '}
+        <a href="/login" className="text-[#5480a9]">
+          Přihlaste se.
+        </a>
       </p>
-      <RegistrationLoginForm formType="Registrovat" />
+      <RegistrationLoginForm formType={'Registrovat'} />
     </div>
   );
 };

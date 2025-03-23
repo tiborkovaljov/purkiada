@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
 
 type YearData = { year: number; fileLink: string; otherLink: string };
 
 const YearTable = ({ data }: { data: YearData[] }) => {
-  const sortedData = data.sort((a: YearData, b: YearData) => { return a.year < b.year ? 1 : -1; });
+  const sortedData = data.sort((a: YearData, b: YearData) => {
+    return a.year < b.year ? 1 : -1;
+  });
 
   return (
     <div className="flex size-full flex-row justify-center h-min">

@@ -1,6 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-// Define a type for the form values
 interface FormValues {
   username: string;
   email: string;
@@ -9,7 +8,7 @@ interface FormValues {
 }
 
 interface RegistrationLoginFormProps {
-  formType: "Login" | "Register"; // Define specific types for formType
+  formType: "Login" | "Register";
 }
 
 const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({

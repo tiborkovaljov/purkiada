@@ -1,7 +1,12 @@
+import CreateCompetitionYears from '~/components/Admin/CreateCompetitionYears';
+
 const Admin = () => {
   return (
-    <div className="relative h-full w-full flex-1">
-
+    <div>
+      <h1 className="text-4xl font-bold md:text-6xl text-center text-[#5480a9] pt-10">
+        Administrace
+      </h1>
+      <CreateCompetitionYears />
     </div>
   );
 };

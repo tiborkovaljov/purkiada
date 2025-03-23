@@ -2,17 +2,17 @@ import YearTable from "~/components/YearTable";
 
 const Competition = () => {
   const yearData = [
-    { year: 2015, fileLink: "#", otherLink: "#" },
-    { year: 2016, fileLink: "#", otherLink: "#" },
-    { year: 2017, fileLink: "#", otherLink: "#" },
-    { year: 2018, fileLink: "#", otherLink: "#" },
-    { year: 2019, fileLink: "#", otherLink: "#" },
-    { year: 2020, fileLink: "#", otherLink: "#" },
-    { year: 2021, fileLink: "#", otherLink: "#" },
-    { year: 2022, fileLink: "#", otherLink: "#" },
-    { year: 2023, fileLink: "#", otherLink: "#" },
-    { year: 2024, fileLink: "#", otherLink: "#" },
-    { year: 2025, fileLink: "#", otherLink: "#" },
+    { year: 2015, fileLink: "#", results: "#" },
+    { year: 2016, fileLink: "#", results: "#" },
+    { year: 2017, fileLink: "#", results: "#" },
+    { year: 2018, fileLink: "#", results: "#" },
+    { year: 2019, fileLink: "#", results: "#" },
+    { year: 2020, fileLink: "#", results: "#" },
+    { year: 2021, fileLink: "#", results: "#" },
+    { year: 2022, fileLink: "#", results: "#" },
+    { year: 2023, fileLink: "#", results: "#" },
+    { year: 2024, fileLink: "#", results: "#" },
+    { year: 2025, fileLink: "#", results: "#" },
   ];
 
   return (
