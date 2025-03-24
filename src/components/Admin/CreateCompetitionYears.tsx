@@ -26,7 +26,7 @@ const CreateCompetitionYears = () => {
   };
 
   return (
-    <div className="p-10">
+    <div>
       <div className="flex flex-col justify-center items-center">
         <div className="w-max content-center p-20">
           <h1 className="text-4xl font-bold md:text-3xl text-left text-[#5480a9]">
@@ -38,8 +38,8 @@ const CreateCompetitionYears = () => {
               onSubmit={onSubmit}
             >
               {() => (
-                <Form className="mt-8 flex gap-4 items-center justify-center">
-                  <div className="flex flex-col">
+                <Form className="mt-8 gap-4 items-center justify-center">
+                  <div className="flex flex-col p-5">
                     Ročník (např. 2024)
                     <Field
                       type="text"
@@ -53,7 +53,7 @@ const CreateCompetitionYears = () => {
                       className="text-red-500"
                     />
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col p-5">
                     Jméno souboru v public/competition_assignments
                     <Field
                       type="text"
@@ -67,7 +67,7 @@ const CreateCompetitionYears = () => {
                       className="text-red-500"
                     />
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col p-5">
                     Jméno souboru v public/competition_results
                     <Field
                       type="text"
@@ -81,12 +81,14 @@ const CreateCompetitionYears = () => {
                       className="text-red-500"
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-                  >
-                    Vytvořit ročník
-                  </button>
+                  <div className="flex flex-col p-5">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    >
+                      Vytvořit ročník
+                    </button>
+                  </div>
                 </Form>
               )}
             </Formik>

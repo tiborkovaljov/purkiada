@@ -24,15 +24,23 @@ const YearTable = ({ data }: { data: YearData[] }) => {
           </thead>
           <thead>
             <tr className="bg-gray-300">
-              <th className="p-4">Rok</th>
-              <th className="p-4">Soubor</th>
+              <th className="p-4">Rok / Zadání na prohlédnutí</th>
+              <th className="p-4">Zadání ke stažení</th>
               <th className="p-4">Výsledky</th>
             </tr>
           </thead>
           <tbody>
             {sortedData.map((item, index) => (
               <tr key={index} className="border-b text-center">
-                <td className="p-4">{item.year}</td>
+                <td className="p-4">
+                  <a
+                    href=""
+                    className="text-blue-500 hover:underline"
+                    target="_blank"
+                  >
+                    {item.year}
+                  </a>
+                </td>
                 <td className="p-4">
                   <a
                     href={item.fileLink}

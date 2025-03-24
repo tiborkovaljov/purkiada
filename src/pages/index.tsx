@@ -1,18 +1,24 @@
-import Head from "next/head";
-import Link from "next/link";
+import Link from 'next/link';
+import { api } from '~/utils/api';
 
-import { api } from "~/utils/api";
+import DivideLine from '~/components/DivideLine';
 
 export default function Home() {
-	const hello = api.post.hello.useQuery({ text: "from tRPC" });
-	const { data, isError, isLoading } = api.post.getAll.useQuery();
+  const hello = api.post.hello.useQuery({ text: 'from tRPC' });
+  const { data, isError, isLoading } = api.post.getAll.useQuery();
 
-  if (!data) { return <p>Site is loading</p>; }
-	if (isLoading) { return <p>Loading...</p>; }
-	if (isError) { return <p>Error loading data.</p>; }
+  if (!data) {
+    return <p>Site is loading</p>;
+  }
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (isError) {
+    return <p>Error loading data.</p>;
+  }
 
-	return (
-		<div className="relative flex w-full flex-1 flex-col items-center justify-center gap-20 p-10">
+  return (
+    <div className="relative flex w-full flex-1 flex-col items-center justify-center gap-20 p-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center md:flex-row">
         <div className="text-left md:w-1/2">
           <h1 className="text-4xl font-bold md:text-6xl">
@@ -39,7 +45,7 @@ export default function Home() {
         </div>
       </div>
 
-      <hr className="h-2 w-[80%] bg-[#5480a9]" />
+      <DivideLine />
 
       <div
         id="about"
@@ -71,7 +77,7 @@ export default function Home() {
         </div>
       </div>
 
-      <hr className="h-2 w-[80%] bg-[#5480a9]" />
+      <DivideLine />
 
       <div
         id="history"
@@ -100,7 +106,7 @@ export default function Home() {
         </div>
       </div>
 
-      <hr className="h-2 w-[80%] bg-[#5480a9]" />
+      <DivideLine />
 
       <div
         id="school"
@@ -120,7 +126,7 @@ export default function Home() {
           <br />
           <br />
           <p>
-            Pokud chcete vědět více, tak navštivte naši školu:{" "}
+            Pokud chcete vědět více, tak navštivte naši školu:{' '}
             <a
               href="https://www.purkynka.cz/"
               className="text-[#5480a9]"
@@ -139,5 +145,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-	);
+  );
 }

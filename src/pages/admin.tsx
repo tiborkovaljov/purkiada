@@ -1,4 +1,5 @@
 import CreateCompetitionYears from '~/components/Admin/CreateCompetitionYears';
+import EditHomepageImages from '~/components/Admin/EditHomepageImages';
 
 const Admin = () => {
   return (
@@ -7,6 +8,7 @@ const Admin = () => {
         Administrace
       </h1>
       <CreateCompetitionYears />
+      <EditHomepageImages />
     </div>
   );
 };

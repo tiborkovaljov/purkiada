@@ -1,14 +1,15 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 interface FormValues {
   username: string;
   email: string;
+  school: string;
   password: string;
   confirmPassword: string;
 }
 
 interface RegistrationLoginFormProps {
-  formType: "Login" | "Register";
+  formType: 'Login' | 'Register';
 }
 
 const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
@@ -18,38 +19,42 @@ const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
     const errors: Partial<FormValues> = {};
 
     if (!values.username) {
-      errors.username = "Username is required";
-    } else if (values.username.length < 2) {
-      errors.username = "Username must be at least 2 characters";
-    } else if (values.username.length > 50) {
-      errors.username = "Username must be less than 50 characters";
+      errors.username = 'Uživatelské jméno je povinné';
+    } else if (values.username.length < 3) {
+      errors.username = 'Uživatelské jméno musí mít alespoň 3 znaky';
+    } else if (values.username.length > 10) {
+      errors.username = 'Uživatelské jméno musí mít pod 10 znaků';
     }
 
     if (!values.email) {
-      errors.email = "Email is required";
+      errors.email = 'E-mail je povinný';
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = 'Invalidní e-mail adresa';
+    }
+
+    if (!values.school) {
+      errors.school = 'Vyplnění školy je povinné';
     }
 
     if (!values.password) {
-      errors.password = "Password is required";
+      errors.password = 'Heslo je povinné';
     } else if (values.password.length < 8) {
-      errors.password = "Password must be at least 8 characters";
+      errors.password = 'Heslo musí být alespoň 8 znaků dlouhé';
     }
 
     if (!values.confirmPassword) {
-      errors.confirmPassword = "Confirm Password is required";
+      errors.confirmPassword = 'Potvrzení hesla je povinné';
     } else if (values.confirmPassword !== values.password) {
-      errors.confirmPassword = "Passwords must match";
+      errors.confirmPassword = 'Hesla se musí shodovat';
     }
 
     return errors;
   };
 
   const onSubmit = (values: FormValues) => {
-    console.log("Form values:", values);
+    console.log('Form values:', values);
     // Here you would typically make an API call to submit the form data
   };
 
@@ -58,10 +63,11 @@ const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
       <div className="w-full max-w-md rounded bg-white p-8 shadow-lg">
         <Formik<FormValues>
           initialValues={{
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
+            username: '',
+            email: '',
+            school: '',
+            password: '',
+            confirmPassword: '',
           }}
           validate={validate}
           onSubmit={onSubmit}
@@ -90,6 +96,19 @@ const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
                 />
                 <ErrorMessage
                   name="email"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div className="mb-4">
+                <Field
+                  type="text"
+                  name="school"
+                  placeholder="Škola, kterou navštěvujete"
+                  className="w-full rounded border p-2"
+                />
+                <ErrorMessage
+                  name="school"
                   component="div"
                   className="text-red-500"
                 />

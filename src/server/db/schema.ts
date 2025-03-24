@@ -32,3 +32,9 @@ export const competitionAssignments = createTable('competition_assignments', {
   fileLink: varchar({ length: 255 }).notNull(),
   resultsLink: varchar({ length: 255 }).notNull(),
 });
+
+export const homepageImages = createTable('homepage_images', {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  imageUrl: varchar({ length: 255 }).notNull(),
+  altText: varchar({ length: 255 }).notNull(),
+});
