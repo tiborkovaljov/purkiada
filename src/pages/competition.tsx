@@ -1,19 +1,22 @@
 import YearTable from '~/components/YearTable';
+import { api } from '~/utils/api';
 
 const Competition = () => {
-  const yearData = [
-    { year: 2015, fileLink: '#', results: '#' },
-    { year: 2016, fileLink: '#', results: '#' },
-    { year: 2017, fileLink: '#', results: '#' },
-    { year: 2018, fileLink: '#', results: '#' },
-    { year: 2019, fileLink: '#', results: '#' },
-    { year: 2020, fileLink: '#', results: '#' },
-    { year: 2021, fileLink: '#', results: '#' },
-    { year: 2022, fileLink: '#', results: '#' },
-    { year: 2023, fileLink: '#', results: '#' },
-    { year: 2024, fileLink: '#', results: '#' },
-    { year: 2025, fileLink: '#', results: '#' },
-  ];
+  const {
+    data: yearData,
+    isLoading,
+    isError,
+  } = api.competitionAssignments.getAll.useQuery();
+
+  if (!yearData) {
+    return <p>Site is loading</p>;
+  }
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (isError) {
+    return <p>Error loading data.</p>;
+  }
 
   return (
     <div className="p-10">

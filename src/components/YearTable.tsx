@@ -1,10 +1,15 @@
 import React from 'react';
 
-type YearData = { year: number; fileLink: string; otherLink: string };
+type YearData = {
+  id: number;
+  yearName: number;
+  fileLink: string;
+  resultsLink: string;
+};
 
 const YearTable = ({ data }: { data: YearData[] }) => {
   const sortedData = data.sort((a: YearData, b: YearData) => {
-    return a.year < b.year ? 1 : -1;
+    return a.yearName < b.yearName ? 1 : -1;
   });
 
   return (
@@ -34,24 +39,25 @@ const YearTable = ({ data }: { data: YearData[] }) => {
               <tr key={index} className="border-b text-center">
                 <td className="p-4">
                   <a
-                    href=""
+                    href={'zadání/' + item.yearName + '/' + item.fileLink}
                     className="text-blue-500 hover:underline"
                     target="_blank"
                   >
-                    {item.year}
+                    {item.yearName}
                   </a>
                 </td>
                 <td className="p-4">
                   <a
-                    href={item.fileLink}
+                    href={'/zadání/' + item.yearName + '/' + item.fileLink}
                     className="text-blue-500 hover:underline"
+                    download={item.fileLink}
                   >
                     Stáhnout
                   </a>
                 </td>
                 <td className="p-4">
                   <a
-                    href={item.otherLink}
+                    href={item.resultsLink}
                     className="text-blue-500 hover:underline"
                   >
                     Otevřít

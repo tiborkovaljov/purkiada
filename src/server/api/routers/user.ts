@@ -1,3 +1,4 @@
+import { and, eq } from 'drizzle-orm';
 import { z } from 'zod';
 
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
@@ -16,16 +17,50 @@ export const userRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1),
-        age: z.number().min(0),
+        username: z.string().min(1),
         email: z.string().email(),
+        password: z.string().min(1),
+        school: z.string().min(1),
       })
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.db.insert(users).values({
         name: input.name,
-        age: input.age,
+        username: input.username,
         email: input.email,
+        password: input.password,
+        school: input.school,
       });
+    }),
+
+  check: publicProcedure
+    .input(
+      z.object({
+        username: z.string().min(1),
+        password: z.string().min(1),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.db.query.users.findMany({
+        where: and(
+          eq(users.username, input.username),
+          eq(users.password, input.password)
+        )
+      });
+
+      if (!user) {
+        return false;
+      }
+
+      if (user.length > 1) {
+        return false;
+      }
+
+      if (user[0]?.isAdmin) {
+        return true;
+      }
+
+      return false;
     }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {

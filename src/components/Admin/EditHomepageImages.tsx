@@ -6,7 +6,7 @@ interface FormValues {
   altText: string;
 }
 
-const EditHomepageImages = () => {
+const HomepageImagesForm = (props: { title: string }) => {
   const mutate = api.homepageImages.update.useMutation({
     onSuccess: () => {
       console.log('Success');
@@ -17,12 +17,57 @@ const EditHomepageImages = () => {
   });
 
   const onSubmit = (values: FormValues) => {
+    console.log(values);
     mutate.mutate({
+      title: props.title,
       imageUrl: values.imageUrl,
       altText: values.altText,
     });
   };
 
+  return (
+    <div>
+      <Formik initialValues={{ imageUrl: '', altText: '' }} onSubmit={onSubmit}>
+        {() => (
+          <Form className="mt-8 gap-4 items-center justify-center">
+            <div className="flex flex-col gap-5 p-5">
+              <label>{props.title}</label>
+              <div className="flex flex-row">
+                <Field
+                  type="text"
+                  name="imageUrl"
+                  placeholder="Image URL"
+                  className="border p-2 rounded"
+                />
+                <div className="pl-2">
+                  <Field
+                    type="text"
+                    name="altText"
+                    placeholder="Alt Text"
+                    className="border p-2 rounded"
+                  />
+                </div>
+              </div>
+              <ErrorMessage
+                name="imageUrl"
+                component="div"
+                className="text-red-500"
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white p-2 rounded"
+              >
+                Upravit obrázek
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
+};
+
+const EditHomepageImages = () => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
@@ -31,146 +76,10 @@ const EditHomepageImages = () => {
             Upravit obrázky na homepage
           </h1>
           <div>
-            <Formik
-              initialValues={{ imageUrl: '', altText: '', title: '' }}
-              onSubmit={onSubmit}
-            >
-              {() => (
-                <Form className="mt-8 gap-4 items-center justify-center">
-                  <div className="flex flex-col gap-5 p-5">
-                    Logo
-                    <div className="flex flex-row">
-                      <Field
-                        type="text"
-                        name="imageUrlLogo"
-                        placeholder="text"
-                        className="border p-2 rounded"
-                      />
-                      <div className="pl-2">
-                        <Field
-                          type="text"
-                          name="altTextLogo"
-                          placeholder="text"
-                          className="border p-2 rounded"
-                        />
-                      </div>
-                      <ErrorMessage
-                        name="imageUrlLogo"
-                        component="div"
-                        className="text-red-500"
-                      />
-                      <div className="pl-2">
-                        <button
-                          type="submit"
-                          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                          Změnit fotku
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-5 p-5">
-                    About fotka
-                    <div className="flex flex-row">
-                      <Field
-                        type="text"
-                        name="imageUrlAbout"
-                        placeholder="text"
-                        className="border p-2 rounded"
-                      />
-                      <div className="pl-2">
-                        <Field
-                          type="text"
-                          name="altTextAbout"
-                          placeholder="text"
-                          className="border p-2 rounded"
-                        />
-                      </div>
-                      <ErrorMessage
-                        name="imageUrlAbout"
-                        component="div"
-                        className="text-red-500"
-                      />
-                      <div className="pl-2">
-                        <button
-                          type="submit"
-                          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                          Změnit fotku
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-5 p-5">
-                    Historie fotka
-                    <div className="flex flex-row">
-                      <Field
-                        type="text"
-                        name="imageUrlHistory"
-                        placeholder="text"
-                        className="border p-2 rounded"
-                      />
-                      <div className="pl-2">
-                        <Field
-                          type="text"
-                          name="altTextHistory"
-                          placeholder="text"
-                          className="border p-2 rounded"
-                        />
-                      </div>
-                      <ErrorMessage
-                        name="imageUrlHistory"
-                        component="div"
-                        className="text-red-500"
-                      />
-                      <div className="pl-2">
-                        <button
-                          type="submit"
-                          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                          Změnit fotku
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-5 p-5">
-                    Informace o škole fotka
-                    <div className="flex flex-row">
-                      <Field
-                        type="text"
-                        name="imageUrlInfo"
-                        placeholder="text"
-                        className="border p-2 rounded"
-                      />
-                      <div className="pl-2">
-                        <Field
-                          type="text"
-                          name="altTextInfo"
-                          placeholder="text"
-                          className="border p-2 rounded"
-                        />
-                      </div>
-                      <ErrorMessage
-                        name="imageUrlInfo"
-                        component="div"
-                        className="text-red-500"
-                      />
-                      <div className="pl-2">
-                        <button
-                          type="submit"
-                          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                          Změnit fotku
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+            <HomepageImagesForm title={'Purkiáda logo img'} />
+            <HomepageImagesForm title={'Purkiáda about img'} />
+            <HomepageImagesForm title={'Purkiáda historie img'} />
+            <HomepageImagesForm title={'Purkiáda budova img'} />
           </div>
         </div>
       </div>

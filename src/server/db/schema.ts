@@ -21,8 +21,10 @@ export const createTable = pgTableCreator((name) => `purkiada_${name}`);
 export const users = createTable('users', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
-  age: integer().notNull(),
+  username: varchar({ length: 255 }).notNull(),
+  password: varchar({ length: 255 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
+  school: varchar({ length: 255 }).notNull(),
   isAdmin: boolean(),
 });
 
@@ -35,6 +37,7 @@ export const competitionAssignments = createTable('competition_assignments', {
 
 export const homepageImages = createTable('homepage_images', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: varchar({ length: 255 }).notNull(),
   imageUrl: varchar({ length: 255 }).notNull(),
   altText: varchar({ length: 255 }).notNull(),
 });

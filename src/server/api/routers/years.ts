@@ -9,7 +9,7 @@ export const yearRouter = createTRPCRouter({
       z.object({
         yearName: z.number().min(1),
         fileLink: z.string().min(1),
-        resultsLink: z.string().min(1),
+        resultsLink: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {

@@ -1,6 +1,8 @@
+import { api } from '~/utils/api';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 interface FormValues {
+  name: string;
   username: string;
   email: string;
   school: string;
@@ -8,15 +10,13 @@ interface FormValues {
   confirmPassword: string;
 }
 
-interface RegistrationLoginFormProps {
-  formType: 'Login' | 'Register';
-}
-
-const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
-  formType,
-}) => {
+const RegistrationForm = () => {
   const validate = (values: FormValues) => {
     const errors: Partial<FormValues> = {};
+
+    if (!values.name) {
+      errors.name = 'Jméno a přijmení jsou povinné';
+    }
 
     if (!values.username) {
       errors.username = 'Uživatelské jméno je povinné';
@@ -53,16 +53,31 @@ const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
     return errors;
   };
 
+  const mutate = api.users.create.useMutation({
+    onSuccess: () => {
+      console.log('Success');
+    },
+    onError: () => {
+      console.log('Failure');
+    },
+  });
+
   const onSubmit = (values: FormValues) => {
-    console.log('Form values:', values);
-    // Here you would typically make an API call to submit the form data
+    mutate.mutate({
+      name: values.name,
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      school: values.school,
+    });
   };
 
   return (
-    <div className="absolute left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded bg-white p-8 shadow-lg">
+    <div className="flex items-center justify-center">
+      <div className="w-full max-w-md rounded p-8 shadow-lg">
         <Formik<FormValues>
           initialValues={{
+            name: '',
             username: '',
             email: '',
             school: '',
@@ -77,8 +92,21 @@ const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
               <div className="mb-4">
                 <Field
                   type="text"
-                  name="username"
+                  name="name"
                   placeholder="Jméno a přijmení"
+                  className="w-full rounded border p-2"
+                />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div className="mb-4">
+                <Field
+                  type="text"
+                  name="username"
+                  placeholder="Uživatelské jméno v soutěži"
                   className="w-full rounded border p-2"
                 />
                 <ErrorMessage
@@ -143,7 +171,7 @@ const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
                 type="submit"
                 className="w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
               >
-                {formType}
+                Registrovat se
               </button>
             </Form>
           )}
@@ -153,4 +181,4 @@ const RegistrationLoginForm: React.FC<RegistrationLoginFormProps> = ({
   );
 };
 
-export default RegistrationLoginForm;
+export default RegistrationForm;

@@ -11,7 +11,7 @@ import { homepageImagesRouter } from "./routers/homepageImages";
  */
 
 export const appRouter = createTRPCRouter({
-	post: userRouter, 
+	users: userRouter, 
 	competitionAssignments: yearRouter,
 	homepageImages: homepageImagesRouter
 });

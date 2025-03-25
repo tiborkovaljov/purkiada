@@ -3,11 +3,19 @@ import { api } from '~/utils/api';
 
 import DivideLine from '~/components/DivideLine';
 
-export default function Home() {
-  const hello = api.post.hello.useQuery({ text: 'from tRPC' });
-  const { data, isError, isLoading } = api.post.getAll.useQuery();
+type ImageDescription = {
+  imageUrl: string;
+  altText: string;
+};
 
-  if (!data) {
+export default function Home() {
+  const {
+    data: homepageImages,
+    isLoading,
+    isError,
+  } = api.homepageImages.getAll.useQuery();
+
+  if (!homepageImages) {
     return <p>Site is loading</p>;
   }
   if (isLoading) {
@@ -16,6 +24,12 @@ export default function Home() {
   if (isError) {
     return <p>Error loading data.</p>;
   }
+  console.log(homepageImages);
+
+  let images: Record<string, ImageDescription> = {};
+  homepageImages.map((image) => {
+    images[image.title] = { imageUrl: image.imageUrl, altText: image.altText };
+  });
 
   return (
     <div className="relative flex w-full flex-1 flex-col items-center justify-center gap-20 p-10">
@@ -38,8 +52,8 @@ export default function Home() {
         </div>
         <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
           <img
-            src="../purkiada_logo.png"
-            alt="Purkiáda Logo"
+            src={'../images/' + images['Purkiáda logo img']?.imageUrl}
+            alt={images['Purkiáda logo img']?.altText}
             className="w-60 max-w-sm"
           />
         </div>
@@ -70,8 +84,8 @@ export default function Home() {
         </div>
         <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
           <img
-            src="../purkiada-promo-1.png"
-            alt="Purkiáda Logo"
+            src={'../images/' + images['Purkiáda about img']?.imageUrl}
+            alt={images['Purkiáda about img']?.altText}
             className="w-sm h-full md:w-full"
           />
         </div>
@@ -85,8 +99,8 @@ export default function Home() {
       >
         <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
           <img
-            src="../purkiada-promo2-1.png"
-            alt="Purkiáda Logo"
+            src={'../images/' + images['Purkiáda historie img']?.imageUrl}
+            alt={images['Purkiáda historie img']?.altText}
             className="w-sm h-full md:w-full"
           />
         </div>
@@ -138,8 +152,8 @@ export default function Home() {
         </div>
         <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
           <img
-            src="../sps_purkynka_budova.jpg"
-            alt="Purkiáda Logo"
+            src={'../images/' + images['Purkiáda budova img']?.imageUrl}
+            alt={images['Purkiáda budova img']?.altText}
             className="w-sm h-full md:w-full"
           />
         </div>

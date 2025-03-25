@@ -16,12 +16,14 @@ export const homepageImagesRouter = createTRPCRouter({
   create: publicProcedure
     .input(
       z.object({
+        title: z.string().min(1),
         imageUrl: z.string().min(1),
         altText: z.string().min(1),
       })
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.db.insert(homepageImages).values({
+        title: input.title,
         imageUrl: input.imageUrl,
         altText: input.altText,
       });
@@ -30,6 +32,7 @@ export const homepageImagesRouter = createTRPCRouter({
   update: publicProcedure
     .input(
       z.object({
+        title: z.string(),
         imageUrl: z.string(),
         altText: z.string(),
       })
@@ -37,8 +40,8 @@ export const homepageImagesRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       await ctx.db
         .update(homepageImages)
-        .set({ imageUrl: input.imageUrl })
-        .where(eq(homepageImages.altText, input.altText));
+        .set({ imageUrl: input.imageUrl, altText: input.altText })
+        .where(eq(homepageImages.title, input.title));
     }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {
