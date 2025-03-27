@@ -1,8 +1,8 @@
 import { api } from '~/utils/api';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { redirect } from 'next/dist/server/api-utils';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { CookiesProvider, useCookies } from 'react-cookie';
 
 interface FormValues {
   username: string;
@@ -11,11 +11,14 @@ interface FormValues {
 
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cookies, setCookie] = useCookies(['user']);
+
   const loginMutation = api.users.check.useMutation();
   const router = useRouter();
 
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
+    
     try {
       const isAdmin = await loginMutation.mutateAsync({
         username: values.username,
@@ -23,13 +26,15 @@ const LoginForm = () => {
       });
 
       if (isAdmin) {
-        console.log("Login successful, redirecting...");
-        router.push("/admin");
+        console.log('Admin login successful, redirecting...');
+        setCookie('user', isAdmin, {path: '/'});
+        router.push('/admin');
       } else {
-        console.error("Invalid credentials");
+        setCookie('user', isAdmin, {path: '/'});
+        router.push('/');
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error('Error during login:', error);
     } finally {
       setIsSubmitting(false);
     }

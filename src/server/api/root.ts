@@ -1,8 +1,8 @@
-import { userRouter } from "~/server/api/routers/user";
-import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { userRouter } from '~/server/api/routers/user';
+import { createCallerFactory, createTRPCRouter } from '~/server/api/trpc';
 
-import { yearRouter } from "./routers/years";
-import { homepageImagesRouter } from "./routers/homepageImages";
+import { yearRouter } from './routers/years';
+import { homepageImagesRouter } from './routers/homepageImages';
 
 /**
  * This is the primary router for your server.
@@ -11,9 +11,9 @@ import { homepageImagesRouter } from "./routers/homepageImages";
  */
 
 export const appRouter = createTRPCRouter({
-	users: userRouter, 
-	competitionAssignments: yearRouter,
-	homepageImages: homepageImagesRouter
+  users: userRouter,
+  competitionAssignments: yearRouter,
+  homepageImages: homepageImagesRouter,
 });
 
 // export type definition of API

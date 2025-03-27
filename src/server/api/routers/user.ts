@@ -45,7 +45,7 @@ export const userRouter = createTRPCRouter({
         where: and(
           eq(users.username, input.username),
           eq(users.password, input.password)
-        )
+        ),
       });
 
       if (!user) {

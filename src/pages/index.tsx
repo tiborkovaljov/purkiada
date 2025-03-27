@@ -18,9 +18,11 @@ export default function Home() {
   if (!homepageImages) {
     return <p>Site is loading</p>;
   }
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
   if (isError) {
     return <p>Error loading data.</p>;
   }
@@ -43,12 +45,20 @@ export default function Home() {
           </h1>
           <br />
           <br />
-          <Link
-            href="/competition"
-            className="mt-4 inline-block rounded-full bg-[#5480a9] px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#41698a] hover:shadow-xl"
-          >
-            Náhled
-          </Link>
+          <div className="flex flex-row gap-2">
+            <Link
+              href="/competition"
+              className="mt-4 inline-block rounded-full bg-[#5480a9] px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#41698a] hover:shadow-xl"
+            >
+              Minulé ročníky
+            </Link>
+            <Link
+              href="/current-year"
+              className="mt-4 inline-block rounded-full bg-[#40A368] px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#41698a] hover:shadow-xl "
+            >
+              Aktuální rok
+            </Link>
+          </div>
         </div>
         <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
           <img
