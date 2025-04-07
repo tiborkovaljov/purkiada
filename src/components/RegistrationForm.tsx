@@ -1,5 +1,6 @@
 import { api } from '~/utils/api';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useRouter } from 'next/router';
 
 interface FormValues {
   name: string;
@@ -11,6 +12,8 @@ interface FormValues {
 }
 
 const RegistrationForm = () => {
+  const router = useRouter();
+
   const validate = (values: FormValues) => {
     const errors: Partial<FormValues> = {};
 
@@ -70,6 +73,8 @@ const RegistrationForm = () => {
       password: values.password,
       school: values.school,
     });
+
+    router.push('/');
   };
 
   return (

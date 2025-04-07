@@ -3,6 +3,7 @@ import { createCallerFactory, createTRPCRouter } from '~/server/api/trpc';
 
 import { yearRouter } from './routers/years';
 import { homepageImagesRouter } from './routers/homepageImages';
+import { newYearButtonStateRouter } from './routers/newYearButtonState';
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   users: userRouter,
   competitionAssignments: yearRouter,
   homepageImages: homepageImagesRouter,
+  newYearButton: newYearButtonStateRouter
 });
 
 // export type definition of API

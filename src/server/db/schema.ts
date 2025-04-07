@@ -41,3 +41,8 @@ export const homepageImages = createTable('homepage_images', {
   imageUrl: varchar({ length: 255 }).notNull(),
   altText: varchar({ length: 255 }).notNull(),
 });
+
+export const newYearButtonState = createTable('new_year_button_state', {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  isDisplayed: boolean().notNull(),
+});

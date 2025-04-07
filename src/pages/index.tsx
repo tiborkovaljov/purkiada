@@ -53,7 +53,7 @@ export default function Home() {
               Minulé ročníky
             </Link>
             <Link
-              href="/current-year"
+              href="/competition"
               className="mt-4 inline-block rounded-full bg-[#40A368] px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#41698a] hover:shadow-xl "
             >
               Aktuální rok

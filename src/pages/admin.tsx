@@ -5,13 +5,14 @@ import { useEffect } from 'react';
 import StartCurrentYearTimer from '~/components/Admin/StartCurrentYearTimer';
 import CreateCompetitionYears from '~/components/Admin/CreateCompetitionYears';
 import EditHomepageImages from '~/components/Admin/EditHomepageImages';
+import DisplayNewYearLink from '~/components/Admin/DisplayNewYearLink';
 
 const Admin = () => {
   const [cookies, setCookie] = useCookies(['user']);
   const router = useRouter();
 
   useEffect(() => {
-    if (cookies.user !== true) {
+    if (cookies.user.isAdmin !== true) {
       router.push('/');
     }
   }, [cookies.user, router]);
@@ -24,6 +25,7 @@ const Admin = () => {
       <StartCurrentYearTimer />
       <CreateCompetitionYears />
       <EditHomepageImages />
+      <DisplayNewYearLink />
     </div>
   );
 };

@@ -9,12 +9,27 @@ interface FormValues {
   password: string;
 }
 
+type User = {
+  id: number,
+  name: string,
+  username: string,
+  isAdmin: boolean
+}
+
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [cookies, setCookie] = useCookies(['user']);
 
+  const {
+      data: userData,
+      isError,
+    } = api.users.getUserIdByUserame.useMutation();
+
   const loginMutation = api.users.check.useMutation();
+  const getUserId = api.users.getUserIdByUserame.useMutation();
   const router = useRouter();
+
+  // let user = new User(data.userData.id, )
 
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
@@ -25,12 +40,27 @@ const LoginForm = () => {
         password: values.password,
       });
 
+      const userId = await getUserId.mutateAsync({
+        username: values.username
+      });
+
+      if(userId === undefined) {
+        return;
+      }
+
+      const userData: User = {
+        id: userId,
+        name: values.username,
+        username: values.username,
+        isAdmin: isAdmin
+      };
+
       if (isAdmin) {
         console.log('Admin login successful, redirecting...');
-        setCookie('user', isAdmin, {path: '/'});
+        setCookie('user', userData, {path: '/'});
         router.push('/admin');
       } else {
-        setCookie('user', isAdmin, {path: '/'});
+        setCookie('user', userData, {path: '/'});
         router.push('/');
       }
     } catch (error) {

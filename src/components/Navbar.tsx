@@ -82,7 +82,7 @@ const Navbar = () => {
               <ul className="flex flex-col">
                 <li>
                   <p className="block px-15 py-4 hover:bg-gray-200 text-[#5480a9] flex-row">
-                    Vítejte, username
+                    Vítejte, {cookies.user.username}
                   </p>
                 </li>
                 <li>

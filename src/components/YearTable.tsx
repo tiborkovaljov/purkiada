@@ -1,4 +1,5 @@
 import React from 'react';
+import { api } from '~/utils/api';
 
 type YearData = {
   id: number;
@@ -12,12 +13,27 @@ const YearTable = ({ data }: { data: YearData[] }) => {
     return a.yearName < b.yearName ? 1 : -1;
   });
 
+  const { data: state } = api.newYearButton.getAll.useQuery();
+  if (!state) {
+    return <div>Loading</div>;
+  }
+
   return (
     <div className="flex size-full flex-row justify-center h-min">
       <div className="flex w-2/4 flex-col items-center gap-4 rounded-lg bg-[#5480a9] p-6 h-min">
         <div className="w-full overflow-hidden rounded-lg bg-white text-black">
           <h1 className="p-10 text-center text-3xl font-bold">AKTUÁLNÍ ROK</h1>
-          <p></p>
+          {state.isDisplayed ? (
+            <div className='flex items-center justify-center pb-10'>
+              <button className="rounded-lg bg-green-500 px-6 py-3 text-white font-semibold hover:bg-green-600 transition duration-300">
+                Otevřít nový rok
+              </button>
+            </div>
+          ) : (
+            <p className="text-center text-gray-500">
+              Zadání zatím není vypuštěno.
+            </p>
+          )}
         </div>
         <table className="w-full table-fixed overflow-hidden rounded-lg bg-white text-black">
           <thead>
