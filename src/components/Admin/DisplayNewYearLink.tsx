@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { api } from '~/utils/api';
-import { useRouter } from 'next/router';
+import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 const DisplayNewYearLink = () => {
   const router = useRouter();
@@ -18,13 +16,11 @@ const DisplayNewYearLink = () => {
   };
 
   const buttonText = state?.isDisplayed
-    ? 'Odstranit link na nový rok'
-    : 'Zobrazit link na nový rok';
+    ? "Odstranit link na nový rok"
+    : "Zobrazit link na nový rok";
 
-  const buttonIcon = state?.isDisplayed ? '⇐' : '⇒';
-
-  const buttonColor = state?.isDisplayed ? 'red' : 'green';
-
+  const buttonIcon = state?.isDisplayed ? "⇐" : "⇒";
+  const buttonColor = state?.isDisplayed ? "red" : "green";
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -34,17 +30,25 @@ const DisplayNewYearLink = () => {
         </h1>
 
         <div className="flex mt-8 gap-4 items-center justify-center">
-          <button
-            onClick={onSubmit}
-            className={`rounded-lg px-6 py-3  text-white font-semibold transition duration-300 bg-${buttonColor}-500 hover:bg-${buttonColor}-600`}
-          >
-            {buttonIcon}
-          </button>
+          {!state?.isDisplayed ? (
+            <button
+              onClick={onSubmit}
+              className={`rounded-lg px-6 py-3  text-white font-semibold transition duration-300 bg-green-500 hover:bg-green-600`}
+            >
+              {buttonIcon}
+            </button>
+          ) : (
+            <button
+              onClick={onSubmit}
+              className={`rounded-lg px-6 py-3  text-white font-semibold transition duration-300 bg-red-500 hover:bg-red-600`}
+            >
+              {buttonIcon}
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
 
 export default DisplayNewYearLink;

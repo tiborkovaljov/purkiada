@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
   const isLoggedIn = cookies.user !== undefined;
 
@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   const logout = () => {
-    cookies.user = undefined;
+    removeCookie('user', { path: '/' });
   };
 
   return (
@@ -26,15 +26,6 @@ const Navbar = () => {
         <li>
           <Link href="/">Domů</Link>
         </li>
-        {/* <li>
-          <Link href="/#about">O soutěži</Link>
-        </li>
-        <li>
-          <Link href="/#history">Historie soutěže</Link>
-        </li>
-        <li>
-          <Link href="/#school">O škole</Link>
-        </li> */}
         <li>
           <Link href="/competition">Ročníky soutěže</Link>
         </li>

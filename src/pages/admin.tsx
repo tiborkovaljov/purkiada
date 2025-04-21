@@ -2,6 +2,7 @@
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+
 import StartCurrentYearTimer from '~/components/Admin/StartCurrentYearTimer';
 import CreateCompetitionYears from '~/components/Admin/CreateCompetitionYears';
 import EditHomepageImages from '~/components/Admin/EditHomepageImages';
@@ -12,7 +13,7 @@ const Admin = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (cookies.user.isAdmin !== true) {
+    if (cookies.user === undefined || cookies.user.isAdmin !== true) {
       router.push('/');
     }
   }, [cookies.user, router]);
